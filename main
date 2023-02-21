@@ -54,7 +54,7 @@ def book_genres(url):
         genres_sent = f'The main genre of this book is: {genres}'
     return genres_sent
 
-
+#la fel arata none, chiar si daca prima data cand am dat run la functie pai mergea far probleme
 def people_reading(book_code):
     url = book_code
     driver = webdriver.Chrome()
@@ -71,7 +71,7 @@ def publish(url):
     book_f_sent = f'This book was published on {book_feature[4],book_feature[5],book_feature[6]}'
     return book_f_sent
 
-
+#code cu problema
 def book_ex(book_code):
     url = book_code
     driver = webdriver.Chrome()
@@ -98,7 +98,7 @@ def book_ex(book_code):
     book_1_sent = f'Many enjoyed {book_1_ex} writen by {author_1_list}. Its rating is: {rating_1_list}'
     return book_1_sent
 
-
+#varianta care merge
 def get_reviewer_name(url):
     data = urlopen(url)
     soup = BeautifulSoup(data, "html.parser")
@@ -106,7 +106,7 @@ def get_reviewer_name(url):
     review_info = soup.find('section', attrs={'class': 'ReviewText__content'}).text
     return f'This is what {review_name} thinks about this book: {review_info}'
 
-
+#varianta care nu merge
 def get_reviewer_name_1(book_code):
     url = book_code
     driver = webdriver.Chrome()
@@ -136,7 +136,7 @@ def book_intro(book_code):
         'book_1': book_description(url),
         'book_2': book_back_cover(url),
         'book_3': book_genres(url),
-        #'book_4': people_reading(url), #la fel arata none, chiar si daca prima data cand am dat run la functie pai mergea far probleme.
+        #'book_4': people_reading(url), 
         'book_5': publish(url),
         'book_6': get_reviewer_name(url)
     })
