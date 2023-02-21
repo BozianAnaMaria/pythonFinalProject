@@ -136,7 +136,7 @@ def book_intro(book_code):
         'book_1': book_description(url),
         'book_2': book_back_cover(url),
         'book_3': book_genres(url),
-        #'book_4': people_reading(url),
+        #'book_4': people_reading(url), #la fel arata none, chiar si daca prima data cand am dat run la functie pai mergea far probleme.
         'book_5': publish(url),
         'book_6': get_reviewer_name(url)
     })
