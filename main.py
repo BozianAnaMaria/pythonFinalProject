@@ -1,10 +1,22 @@
 
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+from selenium.webdriver.edge.service import Service as EdgeService
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 from urllib.request import urlopen
 import bs4
 import requests
 from bs4 import BeautifulSoup
+
+
+def get_webdriver():
+    service = EdgeService(executable_path=EdgeChromiumDriverManager().install())
+    driver = webdriver.Edge(service=service)
+    return driver
 
 
 def get_url(url):
@@ -55,7 +67,8 @@ def people_reading(book_code):
     url = book_code
     driver = webdriver.Chrome()
     driver.get(url)
-    stat = driver.find_elements_by_xpath('//div[@class="SocialSignalsSection__caption"]').text
+    stat = driver.find_element(By.XPATH, '//div[@class="SocialSignalsSection__caption"]').text
+    driver.close()
     return stat
 
 
@@ -70,29 +83,30 @@ def publish(url):
 #code cu problema
 def book_ex(book_code):
     url = book_code
-    driver = webdriver.Chrome()
+    driver = get_webdriver()
     driver.get(url)
-    driver.implicitly_wait(3)
-    book_1_ex = driver.find_elements_by_xpath('//div[@class="BookCard__title"]')
-    author_1_ex = driver.find_elements_by_xpath('//div[@class="BookCard__authorName"]')
-    rating_1_ex = driver.find_elements_by_xpath('//span[@class="Text Text__body3 Text__semi-bold Text__body-standard"]')
+    wait = WebDriverWait(driver, 10) # Asteptam maximum 10 secunde
+    # Asteptam sa apara info
+    wait.until(EC.visibility_of_any_elements_located((By.XPATH, '//div[@class="BookCard__title"]')))
+    book_1_ex = driver.find_elements(By.XPATH, '//div[@class="BookCard__title"]')
+    author_1_ex = driver.find_elements(By.XPATH, '//div[@class="BookCard__authorName"]')
+    
+    
+    rating_1_ex = driver.find_elements(By.XPATH, '//span[@class="Text Text__body3 Text__semi-bold Text__body-standard"]')
+    # XPATHU AICI NU_I BUN ^ Deoarece nu gaseste ratingurile nici nu merge normal
 
-    book_1_list = []
-    author_1_list = []
-    rating_1_list = []
+    books = [a.text for a in book_1_ex]
+    authors = [a.text for a in author_1_ex]
+    # ratings = [a.text for a in rating_1_ex]
 
-    for el in book_1_ex:
-        book_1_list.append(el.text)
-        driver.implicitly_wait(3)
+    recommendations = []
+    for book, author, rating in zip(books, authors, range(len(books))):
+        recommendations.append(
+            f'Many enjoyed {book} writen by {author}. Its rating is: {rating}'
+        )
 
-    for el in range(3):
-        author_1_list.append(author_1_ex[el].text)
-
-    for el in range(3):
-        rating_1_list.append(rating_1_ex[el].text)
-
-    book_1_sent = f'Many enjoyed {book_1_ex} writen by {author_1_list}. Its rating is: {rating_1_list}'
-    return book_1_sent
+    driver.close()
+    return recommendations
 
 
 #alta problema
@@ -107,7 +121,7 @@ def get_reviewer_name(url):
 #varianta care nu merge
 def get_reviewer_name_1(book_code):
     url = book_code
-    driver = webdriver.Chrome()
+    driver = get_webdriver()
     driver.get(url)
 
     review_name_1_list = []
@@ -155,5 +169,5 @@ def get_book_url(book_code):
 gr_url_code = input('goodreads url: ')
 print(get_url(gr_url_code))
 search_text = input('what book are you looking for? Insert book code: ')
-print(get_book_url(search_text))
-
+url = get_book_url(search_text)
+print(url)
