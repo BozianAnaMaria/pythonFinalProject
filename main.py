@@ -1,14 +1,10 @@
-#import urllib
-#import re
+
 from selenium import webdriver
-#from selenium.webdriver.chrome.webdriver import WebDriver
-#from selenium.webdriver.common.by import By
-#from selenium.webdriver.common.keys import Keys
+
 from urllib.request import urlopen
 import bs4
 import requests
 from bs4 import BeautifulSoup
-#from requests import Response
 
 
 def get_url(url):
@@ -98,6 +94,8 @@ def book_ex(book_code):
     book_1_sent = f'Many enjoyed {book_1_ex} writen by {author_1_list}. Its rating is: {rating_1_list}'
     return book_1_sent
 
+
+#alta problema
 #varianta care merge
 def get_reviewer_name(url):
     data = urlopen(url)
