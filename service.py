@@ -72,12 +72,14 @@ def get_book_description(book_code):
     url_1 = 'https://www.goodreads.com/book/show/' + book_code
     source = requests.get(url_1)
 
-    answer_4 = (input('1. Would you like to see BOOK DESCRIPTION? '))
+    answer_4 = input('1. Would you like to see BOOK DESCRIPTION? ').lower()
     print(answer_4)
     while answer_4:
         if answer_4 == 'yes':
+            b_descr = book_description(url_1)
+            print(b_descr)
             with open('BOOK-DESCRIPTION.json', 'w+') as file:
-                json_data = json.dumps(book_description(url_1), )
+                json_data = json.dumps(b_descr)
                 file.write(json_data)
                 url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
                 return get_back_cover(url_2)
@@ -87,7 +89,7 @@ def get_book_description(book_code):
             return get_back_cover(url_2)
         else:
             try:
-                error_text = input('Input should be "yes" or "no": ')
+                error_text = 'Input should be "yes" or "no": '
                 print(error_text)
                 return get_book_description(book_code)
             except:
@@ -104,8 +106,10 @@ def get_back_cover(book_code):
 
     while answer_5:
         if answer_5 == 'yes':
+            b_back_cov = book_back_cover(url_1)
+            print(b_back_cov)
             with open('BOOK-BACK-COVER.json', 'w+') as file:
-                json_data = json.dumps(book_back_cover(url_1), )
+                json_data = json.dumps(b_back_cov)
                 file.write(json_data)
                 url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
                 return get_book_genres(url_2)
@@ -115,7 +119,7 @@ def get_back_cover(book_code):
             return get_book_genres(url_2)
         else:
             try:
-                error_text = input('Input should be "yes" or "no": ')
+                error_text = 'Input should be "yes" or "no": '
                 print(error_text)
                 return get_back_cover(book_code)
             except:
@@ -132,8 +136,10 @@ def get_book_genres(book_code):
 
     while answer_6:
         if answer_6 == 'yes':
+            b_gen = book_genres(url_1)
+            print(b_gen)
             with open('BOOK-GENRES.json', 'w+') as file:
-                json_data = json.dumps(book_genres(url_1), )
+                json_data = json.dumps(b_gen)
                 file.write(json_data)
                 url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
                 return get_publish_date(url_2)
@@ -143,7 +149,7 @@ def get_book_genres(book_code):
             return get_publish_date(url_2)
         else:
             try:
-                error_text = input('Input should be "yes" or "no": ')
+                error_text = 'Input should be "yes" or "no": '
                 print(error_text)
                 return get_book_genres(book_code)
             except:
@@ -160,8 +166,10 @@ def get_publish_date(book_code):
 
     while answer_7:
         if answer_7 == 'yes':
+            b_pub = publish(url_1)
+            print(b_pub)
             with open('BOOK-DATE.json', 'w+') as file:
-                json_data = json.dumps(publish(url_1), )
+                json_data = json.dumps(b_pub)
                 file.write(json_data)
                 url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
                 return get_book_statistic(url_2)
@@ -171,7 +179,7 @@ def get_publish_date(book_code):
             return get_book_statistic(url_2)
         else:
             try:
-                error_text = input('Input should be "yes" or "no": ')
+                error_text = 'Input should be "yes" or "no": '
                 print(error_text)
                 return get_publish_date(book_code)
             except:
@@ -188,8 +196,10 @@ def get_book_statistic(book_code):
 
     while answer_8:
         if answer_8 == 'yes':
+            b_stat = people_reading(url_1)
+            print(b_stat)
             with open('BOOK-STATISTICS.json', 'w+') as file:
-                json_data = json.dumps(people_reading(url_1), )
+                json_data = json.dumps(b_stat)
                 file.write(json_data)
                 url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
                 return get_similar_books(url_2)
@@ -199,7 +209,7 @@ def get_book_statistic(book_code):
             return get_similar_books(url_2)
         else:
             try:
-                error_text = input('Input should be "yes" or "no": ')
+                error_text = 'Input should be "yes" or "no": '
                 print(error_text)
                 return get_book_statistic(book_code)
             except:
@@ -216,8 +226,10 @@ def get_similar_books(book_code):
 
     while answer_11:
         if answer_11 == 'yes':
+            b_sim = book_ex(url_1)
+            print(b_sim)
             with open('SIMILAR-BOOKS.json', 'w+') as file:
-                json_data = json.dumps(book_ex(url_1), )
+                json_data = json.dumps(b_sim)
                 file.write(json_data)
                 url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
                 return get_book_reviews(url_2)
@@ -227,7 +239,7 @@ def get_similar_books(book_code):
             return get_book_reviews(url_2)
         else:
             try:
-                error_text = input('Input should be "yes" or "no": ')
+                error_text = 'Input should be "yes" or "no": '
                 print(error_text)
                 return get_similar_books(book_code)
             except:
@@ -244,8 +256,10 @@ def get_book_reviews(book_code):
 
     while answer_9:
         if answer_9 == 'yes':
+            b_rev = get_reviewer_name_1(url_1)
+            print(b_rev)
             with open('REVIEWS.json', 'w+') as file:
-                json_data = json.dumps(get_reviewer_name_1(url_1), )
+                json_data = json.dumps(b_rev)
                 file.write(json_data)
                 answer_11 = '\nTo see all that you have selected, look through the different JSON files.\n '
                 print(answer_11)
@@ -261,7 +275,7 @@ def get_book_reviews(book_code):
             return add_want_to_read(url_2)
         else:
             try:
-                error_text = input('Input should be "yes" or "no": ')
+                error_text = 'Input should be "yes" or "no": '
                 print(error_text)
                 return get_book_reviews(book_code)
             except:
@@ -278,7 +292,7 @@ def add_want_to_read(book_code):
     while answer_10:
         if answer_10 == 'read':
             with open('WANT-TO-READ.json', 'w+') as file:
-                json_data = json.dumps(book_description(url_1), )
+                json_data = json.dumps(book_description(url_1))
                 file.write(json_data)
                 url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
                 return get_diff_book(url_2)
@@ -289,7 +303,7 @@ def add_want_to_read(book_code):
 
         else:
             try:
-                error_text = input('Input should be "read" or "move"')
+                error_text = 'Input should be "read" or "move" '
                 print(error_text)
                 return add_want_to_read(book_code)
             except:
@@ -319,7 +333,7 @@ def get_diff_book(book_code):
             return ready_to_stop(url_2)
         else:
             try:
-                error_text = input('Input should be "yes" or "no": ')
+                error_text = 'Input should be "yes" or "no": '
                 print(error_text)
                 return get_diff_book(book_code)
             except:
@@ -335,7 +349,7 @@ def ready_to_stop(book_code):
     while answer_13:
         if answer_13 != 'yes' != 'no':
             try:
-                error_text = input('Input should be "yes" or "no": ')
+                error_text = 'Input should be "yes" or "no": '
                 print(error_text)
                 return ready_to_stop(book_code)
             except:
