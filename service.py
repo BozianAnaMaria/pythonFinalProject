@@ -46,6 +46,8 @@ def get_book_url(book_code):
 
     if not source:
         print('Nothing')
+        ans = input('Try again: ')
+        print(ans)
     else:
         print('Found what you are looking for!')
 
@@ -66,7 +68,7 @@ options = {
 print('\n\nHere are the options that you can see for this book:\n', options)
 
 
-def new_fun(book_code):
+def get_book_description(book_code):
     url_1 = 'https://www.goodreads.com/book/show/' + book_code
     source = requests.get(url_1)
 
@@ -78,21 +80,22 @@ def new_fun(book_code):
                 json_data = json.dumps(book_description(url_1), )
                 file.write(json_data)
                 url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
-                return new_fun_2(url_2)
+                return get_back_cover(url_2)
 
         if answer_4 == 'no':
             url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
-            return new_fun_2(url_2)
+            return get_back_cover(url_2)
         else:
             try:
                 error_text = input('Input should be "yes" or "no": ')
                 print(error_text)
+                return get_book_description(book_code)
             except:
                 InputTEXTError('Input should be yes or no: ')
         break
 
 
-def new_fun_2(book_code):
+def get_back_cover(book_code):
     url_1 = 'https://www.goodreads.com/book/show/' + book_code
     source = requests.get(url_1)
 
@@ -105,21 +108,22 @@ def new_fun_2(book_code):
                 json_data = json.dumps(book_back_cover(url_1), )
                 file.write(json_data)
                 url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
-                return new_fun_3(url_2)
+                return get_book_genres(url_2)
 
         if answer_5 == 'no':
             url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
-            return new_fun_3(url_2)
+            return get_book_genres(url_2)
         else:
             try:
                 error_text = input('Input should be "yes" or "no": ')
                 print(error_text)
+                return get_back_cover(book_code)
             except:
                 InputTEXTError('Input should be yes or no: ')
         break
 
 
-def new_fun_3(book_code):
+def get_book_genres(book_code):
     url_1 = 'https://www.goodreads.com/book/show/' + book_code
     source = requests.get(url_1)
 
@@ -132,21 +136,22 @@ def new_fun_3(book_code):
                 json_data = json.dumps(book_genres(url_1), )
                 file.write(json_data)
                 url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
-                return new_fun_4(url_2)
+                return get_publish_date(url_2)
 
         if answer_6 == 'no':
             url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
-            return new_fun_4(url_2)
+            return get_publish_date(url_2)
         else:
             try:
                 error_text = input('Input should be "yes" or "no": ')
                 print(error_text)
+                return get_book_genres(book_code)
             except:
                 InputTEXTError('Input should be yes or no: ')
         break
 
 
-def new_fun_4(book_code):
+def get_publish_date(book_code):
     url_1 = 'https://www.goodreads.com/book/show/' + book_code
     source = requests.get(url_1)
 
@@ -159,21 +164,22 @@ def new_fun_4(book_code):
                 json_data = json.dumps(publish(url_1), )
                 file.write(json_data)
                 url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
-                return new_fun_5(url_2)
+                return get_book_statistic(url_2)
 
         if answer_7 == 'no':
             url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
-            return new_fun_5(url_2)
+            return get_book_statistic(url_2)
         else:
             try:
                 error_text = input('Input should be "yes" or "no": ')
                 print(error_text)
+                return get_publish_date(book_code)
             except:
                 InputTEXTError('Input should be yes or no: ')
         break
 
 
-def new_fun_5(book_code):
+def get_book_statistic(book_code):
     url_1 = 'https://www.goodreads.com/book/show/' + book_code
     source = requests.get(url_1)
 
@@ -182,25 +188,26 @@ def new_fun_5(book_code):
 
     while answer_8:
         if answer_8 == 'yes':
-            with open('BOOK-DATE.json', 'w+') as file:
+            with open('BOOK-STATISTICS.json', 'w+') as file:
                 json_data = json.dumps(people_reading(url_1), )
                 file.write(json_data)
                 url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
-                return new_fun_6(url_2)
+                return get_similar_books(url_2)
 
         if answer_8 == 'no':
             url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
-            return new_fun_6(url_2)
+            return get_similar_books(url_2)
         else:
             try:
                 error_text = input('Input should be "yes" or "no": ')
                 print(error_text)
+                return get_book_statistic(book_code)
             except:
                 InputTEXTError('Input should be yes or no: ')
         break
 
 
-def new_fun_6(book_code):
+def get_similar_books(book_code):
     url_1 = 'https://www.goodreads.com/book/show/' + book_code
     source = requests.get(url_1)
 
@@ -213,21 +220,22 @@ def new_fun_6(book_code):
                 json_data = json.dumps(book_ex(url_1), )
                 file.write(json_data)
                 url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
-                return new_fun_7(url_2)
+                return get_book_reviews(url_2)
 
         if answer_11 == 'no':
             url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
-            return new_fun_7(url_2)
+            return get_book_reviews(url_2)
         else:
             try:
                 error_text = input('Input should be "yes" or "no": ')
                 print(error_text)
+                return get_similar_books(book_code)
             except:
                 InputTEXTError('Input should be yes or no: ')
         break
 
 
-def new_fun_7(book_code):
+def get_book_reviews(book_code):
     url_1 = 'https://www.goodreads.com/book/show/' + book_code
     source = requests.get(url_1)
 
@@ -236,97 +244,124 @@ def new_fun_7(book_code):
 
     while answer_9:
         if answer_9 == 'yes':
-            with open('REVIEWS.json', 'w') as file:
+            with open('REVIEWS.json', 'w+') as file:
                 json_data = json.dumps(get_reviewer_name_1(url_1), )
                 file.write(json_data)
-                answer_11 = '\nTo see all that you have selected, look the through different files.\n '
+                answer_11 = '\nTo see all that you have selected, look through the different JSON files.\n '
                 print(answer_11)
                 time.sleep(5)
                 url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
-                return new_fun_8(url_2)
+                return add_want_to_read(url_2)
 
         if answer_9 == 'no':
-            answer_11 = '\nTo see all that you have selected, look the through different files.\n '
+            answer_11 = '\nTo see all that you have selected, look through the different JSON files.\n '
             print(answer_11)
             time.sleep(5)
             url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
-            return new_fun_8(url_2)
+            return add_want_to_read(url_2)
         else:
             try:
                 error_text = input('Input should be "yes" or "no": ')
                 print(error_text)
+                return get_book_reviews(book_code)
             except:
                 InputTEXTError('Input should be yes or no: ')
         break
 
 
-def new_fun_8(book_code):
+def add_want_to_read(book_code):
     url_1 = 'https://www.goodreads.com/book/show/' + book_code
     source = requests.get(url_1)
 
-    answer_10 = input('8. Would you like to add this book to WANT TO READ or MOVE TO THE NEXT ONE or STOP? \n'
-                       '(variants of answer: "read"/"move"/"stop")\n').lower()
+    answer_10 = input('8. Would you like to add this book to WANT TO READ or MOVE TO THE NEXT ONE? \n'
+                      '(variants of answer: "read" or "move")\n').lower()
     while answer_10:
         if answer_10 == 'read':
             with open('WANT-TO-READ.json', 'w+') as file:
                 json_data = json.dumps(book_description(url_1), )
                 file.write(json_data)
-
-                inp_text = input('\nWould you like to SEARCH another book? \n'
-                                     'Answer with "yes" or "no" ').lower()
-                while inp_text:
-                    if inp_text == 'yes':
-                        answer_ = input(
-                            '\nNext, will appear one question at a time. PLEASE, answer with "yes" or "no".\n'
-                            'To finish, you have to answer to all of them. \n'
-                            'If you do not answer properly, the question will reappear.\n '
-                            '\nPlease, enter BOOK CODE again: ')
-                        return new_fun_9(answer_)
-
-                    elif inp_text == 'no':
-                        print('Done')
-                        break
-                    else:
-                        try:
-                            error_text = input('Input should be "yes" or "no": ')
-                            print(error_text)
-                        except:
-                            InputTEXTError('Input should be yes or no: ')
-                break
-
-        if answer_10 == 'stop':
-            print('Done')
-            break
+                url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
+                return get_diff_book(url_2)
 
         if answer_10 == 'move':
+            url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
+            return get_diff_book(url_2)
+
+        else:
+            try:
+                error_text = input('Input should be "read" or "move"')
+                print(error_text)
+                return add_want_to_read(book_code)
+            except:
+                DecideReadOrMove('Input should be "read" or "move" ')
+        break
+
+
+def get_diff_book(book_code):
+    url_1 = 'https://www.goodreads.com/book/show/' + book_code
+    source = requests.get(url_1)
+    answer_12 = input('9. Would you like to see a DIFFERENT book? \n'
+                      'Answer with "yes" or "no" ').lower()
+    print(answer_12)
+
+    while answer_12:
+        if answer_12 == 'yes':
             answer_ = input(
                 '\nNext, will appear one question at a time. PLEASE, answer with "yes" or "no".\n'
                 'To finish, you have to answer to all of them. \n'
                 'If you do not answer properly, the question will reappear.\n '
-                '\nPlease, enter BOOK CODE again: ')
-            return new_fun_9(answer_)
+                '\nPlease, enter a different BOOK CODE: ')
+            get_book_url(answer_)
+            return get_book_description(answer_)
 
-        if answer_10 != 'read' != 'move' != 'stop':
+        elif answer_12 == 'no':
+            url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
+            return ready_to_stop(url_2)
+        else:
             try:
-                error_text = input('Input should be "read"/"move"/"stop"')
+                error_text = input('Input should be "yes" or "no": ')
                 print(error_text)
+                return get_diff_book(book_code)
             except:
-                DecideReadOrMove('Input should be "read" or "move" or "stop" ')
+                InputTEXTError('Input should be yes or no: ')
         break
 
 
-def new_fun_9(book_code):
+def ready_to_stop(book_code):
+    url_1 = 'https://www.goodreads.com/book/show/' + book_code
+    source = requests.get(url_1)
+
+    answer_13 = input('10. Are you sure you want to stop? ').lower()
+    while answer_13:
+        if answer_13 != 'yes' != 'no':
+            try:
+                error_text = input('Input should be "yes" or "no": ')
+                print(error_text)
+                return ready_to_stop(book_code)
+            except:
+                InputTEXTError('Input should be yes or no: ')
+        if answer_13 == 'no':
+            url_2 = url_1.split('https://www.goodreads.com/book/show/')[-1]
+            return get_diff_book(url_2)
+        if answer_13 == 'yes':
+            print('You have finished.')
+            break
+        break
+    breakpoint()
+
+
+def all_info(book_code):
     url_1 = book_code
 
     return {
-        '1': new_fun(url_1),
-        '2': new_fun_2(url_1),
-        '3': new_fun_3(url_1),
-        '4': new_fun_4(url_1),
-        '5': new_fun_5(url_1),
-        '6': new_fun_6(url_1),
-        '7': new_fun_7(url_1),
-        '8': new_fun_8(url_1)
+        '1': get_book_description(url_1),
+        '2': get_back_cover(url_1),
+        '3': get_book_genres(url_1),
+        '4': get_publish_date(url_1),
+        '5': get_book_statistic(url_1),
+        '6': get_similar_books(url_1),
+        '7': get_book_reviews(url_1),
+        '8': add_want_to_read(url_1)
     }
 
 
@@ -334,5 +369,4 @@ answer = input('\nNext, will appear one question at a time, in this order. PLEAS
                'To finish, you have to answer to all of them. \n'
                'If you do not answer properly, the question will reappear. \n'
                '\nPlease, enter BOOK CODE again: ')
-print(new_fun_9(answer))
-
+print(all_info(answer))
