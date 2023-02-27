@@ -314,7 +314,7 @@ def add_want_to_read(book_code):
 def get_diff_book(book_code):
     url_1 = 'https://www.goodreads.com/book/show/' + book_code
     source = requests.get(url_1)
-    answer_12 = input('9. Would you like to see a DIFFERENT book? \n'
+    answer_12 = input('9. Would you like to search a DIFFERENT book? \n'
                       'Answer with "yes" or "no" ').lower()
     print(answer_12)
 
