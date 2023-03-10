@@ -12,7 +12,7 @@ At the end, the user has the possibility to decide if they want to add the book 
 # RO
 Scopul acestui proiect este de a găsi cărți de pe link-ul Goodreads cu ajutorul la web scraping. 
 
-Programul trebuie rulat din service.py 
+📌Programul trebuie rulat din service.py📌
  
 La începutul rulării programului, apar condiții și instrucțiuni cum ar trebuie să fie folosit. Persoana care rulează programul este nevoită să răspundă la întrebări într-o anumită ordine. Cu ajutorul întrebărilor, el/ea poate alege ce dorește să vadă despre cartea aleasă. Toată informația găsită de către program, este stocată în diferite file-uri JSON, corespunzătoare întrebării. 
 
